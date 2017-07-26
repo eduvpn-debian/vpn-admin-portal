@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html lang="en">
+{% include 'head.twig' %}
+<body>
+    {% include 'header.twig' %}
+
+    <ul class="menu">
+      <li><a href="{{ requestRoot }}connections">{% trans "Connections" %}</a></li>
+      <li><a href="{{ requestRoot }}users">{% trans "Users" %}</a></li>
+      <li><a href="{{ requestRoot }}info">{% trans "Info" %}</a></li>
+      <li class="active"><a href="{{ requestRoot }}stats">{% trans "Stats" %}</a></li>
+      <li><a href="{{ requestRoot }}messages">{% trans "Messages" %}</a></li>
+      <li><a href="{{ requestRoot }}log">{% trans "Log" %}</a></li>
+    </ul>
+
+    {% if false == stats %}
+
+        <p class="plain">
+            {% trans "The process generating the VPN usage statistics did not run yet..." %}
+        </p>
+
+    {% else %}
+
+        <h2>{% trans "Overall" %}</h2>
+
+        <p>
+            {% trans "These statistics were last updated on" %} {{ stats.generated_at|date('Y-m-d H:i:s') }} ({{ date()|date('T') }}).
+        </p>
+
+        <dl>
+            <dt>{% trans "Total Traffic" %}</dt>
+            <dd>{{ stats.total_traffic|sizeToHuman }}</dd>
+
+            <dt>{% trans "Total # Unique Users" %}</dt>
+            <dd>{{ stats.unique_user_count }}</dd>
+
+            <dt>{% trans "Highest # Concurrent Connections" %}</dt>
+            <dd>{{ stats.max_concurrent_connections }}</dd>
+        </dl>
+
+        <h2>{% trans "Daily" %}</h2>
+
+        <table>
+            <thead>
+                <tr><th>{% trans "Date" %}</th><th>{% trans "# Unique Users" %}</th><th>{% trans "Traffic" %}</th></tr>
+            </thead>
+            <tbody>
+            {% for item in stats.days %}
+                <tr>
+                    <td>{{ item.date }}</td>
+                    <td>{{ item.unique_user_count }}</td>
+                    <td>{{ item.bytes_transferred|sizeToHuman }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    {% endif %}
+
+    {% include 'footer.twig' %}
+</body>
+</html>

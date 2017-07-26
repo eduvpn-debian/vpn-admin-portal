@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html lang="en">
+{% include 'head.twig' %}
+<body>
+    {% include 'header.twig' %}
+
+    <ul class="menu">
+      <li><a href="{{ requestRoot }}connections">{% trans "Connections" %}</a></li>
+      <li><a href="{{ requestRoot }}users">{% trans "Users" %}</a></li>
+      <li class="active"><a href="{{ requestRoot }}info">{% trans "Info" %}</a></li>
+      <li><a href="{{ requestRoot }}stats">{% trans "Stats" %}</a></li>
+      <li><a href="{{ requestRoot }}messages">{% trans "Messages" %}</a></li>
+      <li><a href="{{ requestRoot }}log">{% trans "Log" %}</a></li>
+    </ul>
+
+    {% for profile in profileList %}
+        <h2>{{ profile.displayName }}</h2>
+
+        <table>
+            <tbody>
+                {% for key, v in profile %}
+                    <tr>
+                        <th>{{ key }}</th>
+                        {% if v is iterable and v is not empty %}
+                            <td>
+                            <ul class="simple">
+                                {% for x in v %}
+                                    <li>{{ x }}</li>
+                                {% endfor %}
+                            </ul>
+                            </td>
+                        {% elseif v is same as (true) %}
+                            <td><span class="plain">{% trans "Yes" %}</span></td>
+                        {% elseif v is same as (false) %}
+                            <td><span class="plain">{% trans "No" %}</span></td>
+                        {% elseif v is empty %}
+                            <td><em>{% trans "N/A" %}</em></td>
+                        {% else %}                        
+                            <td> {{ v }}</td>
+                        {% endif %}    
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endfor %}
+
+    {% include 'footer.twig' %}
+</body>
+</html>

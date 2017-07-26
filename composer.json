@@ -1,0 +1,37 @@
+{
+    "authors": [
+        {
+            "email": "fkooman@tuxed.net",
+            "name": "Fran\u00e7ois Kooman",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "SURFnet\\VPN\\Admin\\": "src/",
+            "SURFnet\\VPN\\Admin\\Tests\\": "tests/"
+        }
+    },
+    "description": "VPN Admin Portal",
+    "license": "AGPL-3.0",
+    "name": "eduvpn/vpn-admin-portal",
+    "repositories": [
+        {
+            "no-api": true,
+            "type": "vcs",
+            "url": "https://github.com/eduvpn/vpn-lib-common"
+        }
+    ],
+    "require": {
+        "eduvpn/common": "^1",
+        "ext-gettext": "*",
+        "ext-json": "*",
+        "ext-spl": "*",
+        "fkooman/secookie": "^1",
+        "php": ">5.4",
+        "twig/twig": "^1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.8"
+    }
+}

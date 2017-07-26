@@ -1,0 +1,56 @@
+<?php
+
+return [
+    // set secureCookie flag, so browser only sends them over HTTPS
+    'secureCookie' => true,
+
+    // template caching for performance improvements
+    'enableTemplateCache' => true,
+
+    'authMethod' => 'FormAuthentication',
+    //'authMethod' => 'MellonAuthentication',
+
+    'FormAuthentication' => [
+        // use vpn-admin-portal-add-user to add users!
+    ],
+
+    'MellonAuthentication' => [
+        'attribute' => 'MELLON_NAME_ID',
+        //'attribute' => 'MELLON_eduPersonTargetedID',
+
+        // add the entityID of the IdP to the user ID. This MUST be enabled
+        // if multiple IdPs are used and the attribute used for the user ID is 
+        // not enforced to be unique among the different IdPs. In a "hub&spoke"
+        // identity federation, e.g. SURFconext you do not need this, for 
+        // eduGAIN enabled SPs you do!
+        'addEntityID' => false,
+
+        // only allow users from IdP with entityID and userId value, in the 
+        // format "entityID|userId"
+        'userIdAuthorization' => [
+            'https://idp.example.org/saml|12345678',
+            'https://idp.example.com/saml|87654321',
+        ],
+
+        // only allow users from IdP with entityId and entitlement value, in 
+        // the format "entityID|entitlement"
+        //'entitlementAttribute' => 'MELLON_eduPersonEntitlement',
+        //'entitlementAuthorization' => [
+        //    'https://idp.example.org/saml|urn:x:admin',
+        //    'https://idp.example.com/saml|urn:x:admin',
+        //],
+    ],
+
+    // Connection to vpn-server-api
+    'apiUser' => 'vpn-admin-portal',
+    'apiPass' => 'XXX-vpn-admin-portal/vpn-server-api-XXX',
+    'apiUri' => 'http://localhost/vpn-server-api/api.php',
+
+    // supported languages in the UI, the first one mentioned is the default
+    'supportedLanguages' => [
+        'en_US' => 'English',
+        'nl_NL' => 'Nederlands',
+        //'fr_FR' => 'Français',
+        //'de_DE' => 'Deutsch',
+    ],
+];
