@@ -1,0 +1,2 @@
+etc/vpn-admin-portal usr/share/vpn-admin-portal/config
+var/lib/vpn-admin-portal usr/share/vpn-admin-portal/data

@@ -1,0 +1,7 @@
+#!/bin/sh
+
+#DEBHELPER
+
+chown www-data:www-data /var/lib/vpn-admin-portal
+chmod 700 /var/lib/vpn-admin-portal
+

@@ -7,7 +7,8 @@
  * Copyright: 2016-2017, The Commons Conservancy eduVPN Programme
  * SPDX-License-Identifier: AGPL-3.0+
  */
-require_once sprintf('%s/vendor/autoload.php', dirname(__DIR__));
+$baseDir = '/usr/share/vpn-admin-portal';
+require_once sprintf('%s/vendor/autoload.php', $baseDir);
 
 use SURFnet\VPN\Common\CliParser;
 use SURFnet\VPN\Common\Config;
@@ -30,7 +31,7 @@ try {
 
     $instanceId = $opt->hasItem('instance') ? $opt->getItem('instance') : 'default';
 
-    $configFile = sprintf('%s/config/%s/config.php', dirname(__DIR__), $instanceId);
+    $configFile = sprintf('%s/config/%s/config.php', $baseDir, $instanceId);
     $config = Config::fromFile($configFile);
     $configData = $config->toArray();
     $passwordHash = password_hash($opt->getItem('pass'), PASSWORD_DEFAULT);
