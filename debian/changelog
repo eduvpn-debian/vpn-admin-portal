@@ -1,3 +1,10 @@
+vpn-admin-portal (1.1.0-1) stable; urgency=medium
+
+  * New upstream version 1.1.0
+  * add fonts-roboto-fontface dependency
+
+ -- Gijs Molenaar (launchpad ppa build key) <gijs@pythonic.nl>  Thu, 17 Aug 2017 16:00:51 +0200
+
 vpn-admin-portal (1.0.0-2) stable; urgency=medium
 
   * set path to php socket correctly
