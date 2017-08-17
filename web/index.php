@@ -11,6 +11,7 @@ require_once sprintf('%s/vendor/autoload.php', dirname(__DIR__));
 use fkooman\SeCookie\Cookie;
 use fkooman\SeCookie\Session;
 use SURFnet\VPN\Admin\AdminPortalModule;
+use SURFnet\VPN\Admin\Graph;
 use SURFnet\VPN\Admin\TwigFilters;
 use SURFnet\VPN\Common\Config;
 use SURFnet\VPN\Common\Http\CsrfProtectionHook;
@@ -29,6 +30,14 @@ use SURFnet\VPN\Common\Logger;
 use SURFnet\VPN\Common\TwigTpl;
 
 $logger = new Logger('vpn-admin-portal');
+
+// on various systems we have various font locations
+// XXX move this to configuration
+$fontList = [
+    '/usr/share/fonts/google-roboto/Roboto-Regular.ttf', // Fedora (google-roboto-fonts)
+    '/usr/share/fonts/roboto_fontface/roboto/Roboto-Regular.ttf', // Fedora/CentOS (roboto-fontface-fonts)
+    '/usr/share/fonts-roboto-fontface/fonts/Roboto-Regular.ttf', // Debian (fonts-roboto-fontface)
+];
 
 try {
     $request = new Request($_SERVER, $_GET, $_POST);
@@ -155,9 +164,13 @@ try {
     $twoFactorModule = new TwoFactorModule($serverClient, $session, $tpl);
     $service->addModule($twoFactorModule);
 
+    $graph = new Graph();
+    $graph->setFontList($fontList);
+
     $adminPortalModule = new AdminPortalModule(
         $tpl,
-        $serverClient
+        $serverClient,
+        $graph
     );
     $service->addModule($adminPortalModule);
 
