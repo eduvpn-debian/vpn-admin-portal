@@ -167,6 +167,11 @@ try {
 
     $graph = new Graph();
     $graph->setFontList($fontList);
+    if ($config->hasSection('statsConfig')) {
+        if($config->getSection('statsConfig')->hasItem('barColor')) {
+            $graph->setBarColor($config->getSection('statsConfig')->getItem('barColor'));
+        }
+    }
 
     $adminPortalModule = new AdminPortalModule(
         $tpl,

@@ -27,6 +27,9 @@ class Graph
     /** @var array */
     private $imageSize = [600, 300];
 
+    /** @var array */
+    private $barColor = [0x55, 0x55, 0x55];
+
     /**
      * @param \DateTime $dateTime
      */
@@ -52,6 +55,14 @@ class Graph
     }
 
     /**
+     * @var array
+     */
+    public function setBarColor(array $barColor)
+    {
+        $this->barColor = $barColor;
+    }
+
+    /**
      * @param array    $graphData where the key is the date of the format `Y-m-d`
      *                            and the value is the value to plot
      * @param callable $toHuman   a function to convert the values to human
@@ -74,7 +85,7 @@ class Graph
 
         if (is_null($toHuman)) {
             $toHuman = function ($v) {
-                return sprintf('%d ', $v);
+                return sprintf('%s ', $v);
             };
         }
 
@@ -89,18 +100,14 @@ class Graph
 
         $maxValue = $this->getMaxValue($dateList);
         $yAxisTopText = $toHuman($maxValue);
-        //var_dump($yAxisTopText);
         $yAxisMiddleText = $toHuman($maxValue / 2);
-        //var_dump($yAxisMiddleText);
         $yAxisTextWidth = max($this->textWidth($yAxisTopText), $this->textWidth($yAxisMiddleText));
-        //var_dump($yAxisTextWidth);
         $yAxisTextHeight = max($this->textHeight($yAxisTopText), $this->textHeight($yAxisMiddleText));
-        //var_dump($yAxisTextHeight);
         $relativeDateList = $this->toRelativeValues($dateList);
 
         // XXX loop over all text fields and determine MAX
         $xAxisTextHeight = $this->textHeight('2017-01-01');
-        $xAxisTextWidth = $this->textWidth('2017-01-01') + 4;
+        $xAxisTextWidth = $this->textWidth('2017-01-01') + 6;
 
         $xOffset = $yAxisTextWidth;
         $yOffset = $yAxisTextHeight / 2;
@@ -112,7 +119,7 @@ class Graph
         imagefill($img, 0, 0, imagecolorallocatealpha($img, 0, 0, 0, 127));
 
         $textColor = imagecolorallocate($img, 0x55, 0x55, 0x55);
-        $barColor = imagecolorallocate($img, 0xdf, 0x7f, 0x0c);
+        $barColor = imagecolorallocate($img, $this->barColor[0], $this->barColor[1], $this->barColor[2]);
         $lineColor = imagecolorallocate($img, 0xdd, 0xdd, 0xdd);
 
         // array imagettftext ( resource $image , float $size , float $angle , int $x , int $y , int $color , string $fontfile , string $text )
