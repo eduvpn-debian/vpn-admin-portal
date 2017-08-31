@@ -10,7 +10,7 @@ Vcs-Git: git://github.com/eduvpn-debian/vpn-admin-portal.git
 Vcs-Browser: https://github.com/eduvpn-debian/vpn-admin-portal/
 
 Package: vpn-admin-portal
-Architecture: any
+Architecture: all
 Depends: ${misc:Depends}, ${phpcomposer:Debian-require}, fonts-roboto-fontface
 Suggests: ${phpcomposer:Debian-suggest}
 Description: VPN Admin Portal
