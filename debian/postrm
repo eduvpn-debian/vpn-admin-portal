@@ -1,5 +1,5 @@
 #!/bin/sh
-# postrm script for php-saml-ds
+# postrm script for vpn-admin-portal
 #
 # see: dh_installdeb(1)
 
@@ -12,7 +12,12 @@ fi
 
 
 case "$1" in
-    upgrade|failed-upgrade|abort-install|abort-upgrade|disappear|remove)
+    failed-upgrade|abort-install|abort-upgrade|disappear|remove)
+    ;;
+
+    upgrade)
+	echo "removing old template cache..."
+	rm -rf /var/lib/vpn-admin-portal/*/tpl/*
     ;;
     
     purge)
