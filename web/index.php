@@ -66,24 +66,30 @@ try {
         $templateCache = sprintf('%s/tpl', $dataDir);
     }
 
-    $session = new Session(
-        [
-            'SameSite' => 'Lax',
-            'Path' => $request->getRoot(),
-            'DomainBinding' => $request->getServerName(),
-            'PathBinding' => $request->getRoot(),
-            'Secure' => $config->getItem('secureCookie'),
-        ]
-    );
-
     $cookie = new Cookie(
         [
             'SameSite' => 'Lax',
             'Secure' => $config->getItem('secureCookie'),
             'Max-Age' => 60 * 60 * 24 * 90,   // 90 days
-            'Path' => $request->getRoot(),
-            'Domain' => $request->getServerName(),
         ]
+    );
+
+    $session = new Session(
+        [
+            'SessionName' => 'SID',
+            'DomainBinding' => $request->getServerName(),
+            'PathBinding' => $request->getRoot(),
+        ],
+        new Cookie(
+            [
+                // we need to bind to "Path", otherwise the (Basic) 
+                // authentication mechanism will set a cookie for 
+                // {ROOT}/_form/auth/
+                'Path' => $request->getRoot(),
+                'SameSite' => 'Lax',
+                'Secure' => $config->getItem('secureCookie'),
+            ]
+        )
     );
 
     $tpl = new TwigTpl($templateDirs, dirname(__DIR__).'/locale', 'VpnAdminPortal', $templateCache);
