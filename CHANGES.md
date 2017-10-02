@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.1.6 (2017-09-11)
+- change session name to SID to get rid of explicit Domain binding;
+
+## 1.1.5 (2017-09-11)
+- update session handling:
+  - (BUG) session cookie MUST expire at end of user agent session;
+  - do not explicitly specify domain for cookie, this makes the 
+    browser bind the cookie to actual domain and path;
+
+## 1.1.4 (2017-09-10)
+- update `fkooman/secookie`
+
 ## 1.1.3 (2017-08-17)
 - more accurate yAxis text
 - more space between graph and date labels
