@@ -14,5 +14,6 @@ Architecture: all
 Depends: ${misc:Depends}, ${phpcomposer:Debian-require}, fonts-roboto-fontface,
  php-cli
 Suggests: ${phpcomposer:Debian-suggest}
-Description: VPN Admin Portal
- The admin portal of the eduVPN project
+Description: Admin portal of the eduVPN project
+ This should be a more extensive description but the original source doesn't
+ have one.
