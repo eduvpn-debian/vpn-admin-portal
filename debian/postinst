@@ -11,8 +11,9 @@ fi
 
 case "$1" in
     configure)
-	chown www-data:www-data /var/lib/vpn-admin-portal
-	chmod 700 /var/lib/vpn-admin-portal
+        chown www-data:www-data /var/lib/vpn-admin-portal
+        chmod 700 /var/lib/vpn-admin-portal
+        chmod 755 /usr/share/vpn-admin-portal/bin/*
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
