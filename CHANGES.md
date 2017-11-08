@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.7 (2017-10-30)
+- no longer have Dutch language available by default, sync with user portal
+- refactor code to ease RPM/DEB packaging
+
 ## 1.1.6 (2017-09-11)
 - change session name to SID to get rid of explicit Domain binding;
 
